@@ -1,11 +1,1056 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const services = [
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" /></svg>`,
+    title: "Procurement Services",
+    description: "Strategic sourcing and procurement of industrial equipment, materials, and supplies — ensuring quality, compliance, and cost-efficiency at every stage.",
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&auto=format&fit=crop&q=80",
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" /></svg>`,
+    title: "Operational Office Setup",
+    description: "End-to-end office infrastructure deployment — from spatial planning and fit-out to network cabling, power distribution, and full commissioning.",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&auto=format&fit=crop&q=80",
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>`,
+    title: "Cooling Systems",
+    description: "Design, installation, and maintenance of HVAC and industrial cooling infrastructure — keeping your operations running at optimal thermal performance.",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=80",
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>`,
+    title: "Electrical Engineering",
+    description: "Comprehensive electrical design, installation, and commissioning for commercial and industrial facilities — from LV/MV systems to smart metering.",
+    image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&auto=format&fit=crop&q=80",
+  },
+  {
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" /></svg>`,
+    title: "Facility Maintenance",
+    description: "Scheduled and reactive maintenance programs to maximise uptime and extend the life of your critical infrastructure and engineering assets.",
+    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&auto=format&fit=crop&q=80",
+  },
+];
+
+const stats = [
+  { value: "10+", label: "Years of Experience" },
+  { value: "200+", label: "Projects Delivered" },
+  { value: "50+", label: "Enterprise Clients" },
+  { value: "100%", label: "Commitment to Quality" },
+];
 ---
 
 <Layout>
-	<Welcome />
+  <Navbar />
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg">
+      <img
+        src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=1800&auto=format&fit=crop&q=85"
+        alt="Industrial engineering facility"
+        class="hero-img"
+        fetchpriority="high"
+      />
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-tag">Engineering Excellence</div>
+      <h1 class="hero-title">
+        Built to<br />
+        <span class="accent">Perform.</span><br />
+        Engineered to<br />
+        Last.
+      </h1>
+      <p class="hero-sub">
+        Mykado delivers end-to-end engineering services — from strategic procurement and
+        office setup to cooling systems, electrical infrastructure, and maintenance.
+      </p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-primary">Explore Services</a>
+        <a href="#contact" class="btn-ghost">Talk to Us</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- STATS BAND -->
+  <section id="stats">
+    <div class="stats-inner">
+      {stats.map((s) => (
+        <div class="stat">
+          <span class="stat-value">{s.value}</span>
+          <span class="stat-label">{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- SECTION DIVIDER -->
+  <div class="section-divider">
+    <span class="divider-line"></span>
+    <span class="divider-diamond"></span>
+    <span class="divider-line"></span>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-inner">
+      <div class="section-header">
+        <p class="section-tag">What We Do</p>
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-desc">
+          From sourcing and procurement to complex engineering installations, we bring
+          the expertise and reliability that your operations demand.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        {services.map((service, i) => (
+          <div class={`service-card ${i === 0 ? "featured" : ""}`}>
+            <div class="service-img-wrap">
+              <img src={service.image} alt={service.title} loading="lazy" />
+            </div>
+            <div class="service-body">
+              <div class="service-icon" set:html={service.icon} />
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION DIVIDER -->
+  <div class="section-divider">
+    <span class="divider-line"></span>
+    <span class="divider-diamond"></span>
+    <span class="divider-line"></span>
+  </div>
+
+  <!-- ABOUT / WHY US -->
+  <section id="about">
+    <div class="about-inner">
+      <div class="about-img-wrap">
+        <img
+          src="https://images.unsplash.com/photo-1565715101869-4a3e8cbca5dc?w=900&auto=format&fit=crop&q=80"
+          alt="Engineers at work"
+          loading="lazy"
+        />
+        <div class="about-img-badge">
+          <span class="badge-num">10+</span>
+          <span class="badge-text">Years in the Field</span>
+        </div>
+      </div>
+
+      <div class="about-content">
+        <p class="section-tag">Who We Are</p>
+        <h2 class="section-title">Engineering That<br /><span class="accent">Moves Things Forward</span></h2>
+        <p>
+          Mykado is an engineering services company committed to delivering infrastructure and
+          solutions that stand the test of time. We combine technical mastery with operational
+          discipline to serve clients across commercial, industrial, and institutional sectors.
+        </p>
+        <p>
+          Whether you're setting up a new operational facility, upgrading your electrical systems,
+          or need a reliable procurement partner — we bring the expertise, process, and people
+          to get it done right.
+        </p>
+
+        <ul class="about-points">
+          <li>
+            <span class="point-icon">✦</span>
+            Certified engineers with multi-sector experience
+          </li>
+          <li>
+            <span class="point-icon">✦</span>
+            Rigorous project management from brief to delivery
+          </li>
+          <li>
+            <span class="point-icon">✦</span>
+            Transparent reporting and communication at every stage
+          </li>
+          <li>
+            <span class="point-icon">✦</span>
+            Safety-first culture embedded in every project
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-wrapper">
+      <div class="contact-header">
+        <p class="section-tag">Get In Touch</p>
+        <h2 class="section-title">Let's Work <span class="accent">Together</span></h2>
+        <p class="contact-lead">
+          Have a project in mind or want to explore how Mykado can support your operations?
+          Fill out the form and our team will get back to you within 24 hours.
+        </p>
+      </div>
+
+      <div class="contact-inner">
+        <div class="contact-info">
+          <h3 class="contact-info-heading">Contact Details</h3>
+          <div class="contact-details">
+            <a href="mailto:info@mykado.com" class="contact-item">
+              <span class="contact-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" width="20" height="20">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                </svg>
+              </span>
+              <div>
+                <span class="contact-item-label">Email</span>
+                <span class="contact-item-value">info@mykado.com</span>
+              </div>
+            </a>
+            <a href="tel:+2349061504585" class="contact-item">
+              <span class="contact-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" width="20" height="20">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                </svg>
+              </span>
+              <div>
+                <span class="contact-item-label">Phone</span>
+                <span class="contact-item-value">+234 906 150 4585</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="contact-note">
+            <p>Our team typically responds within one business day. For urgent matters, please call directly.</p>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="form-card-header">
+            <h3>Send Us a Message</h3>
+          </div>
+          <form class="contact-form" id="contact-form" action="https://formspree.io/f/xqejnebl" method="POST">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="John Doe" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="john@company.com" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="+234 000 000 0000" />
+            </div>
+
+            <div class="form-group">
+              <label for="service">Service of Interest</label>
+              <select id="service" name="service">
+                <option value="" disabled selected>Select a service...</option>
+                <option>Procurement Services</option>
+                <option>Operational Office Setup</option>
+                <option>Cooling Systems</option>
+                <option>Electrical Engineering</option>
+                <option>Facility Maintenance</option>
+                <option>Other / General Enquiry</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Tell us about your project or requirements..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary form-submit">
+              Send Message
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="16" height="16">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </button>
+
+            <p class="form-note" id="form-status"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
 </Layout>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  document.querySelectorAll(
+    ".service-card, .stat, .about-content, .about-img-wrap, .contact-info, .form-card"
+  ).forEach((el) => {
+    observer.observe(el);
+  });
+
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const status = document.getElementById("form-status");
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const response = await fetch(form.action, {
+      method: "POST",
+      body: data,
+      headers: { Accept: "application/json" },
+    });
+    if (response.ok) {
+      if (status) status.textContent = "✓ Message sent! We'll be in touch soon.";
+      form.reset();
+    } else {
+      if (status) status.textContent = "Something went wrong. Please try again or email us directly.";
+    }
+  });
+</script>
+
+<style>
+  /* ===== HERO ===== */
+  #hero {
+    position: relative;
+    height: 100svh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      rgba(13, 15, 14, 0.92) 0%,
+      rgba(13, 15, 14, 0.7) 50%,
+      rgba(13, 15, 14, 0.35) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+  }
+
+  .hero-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-tag::before {
+    content: "";
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--color-accent);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 9vw, 7.5rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+  }
+
+  .accent {
+    color: var(--color-accent);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: rgba(232, 228, 220, 0.7);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: var(--color-accent);
+    color: #000;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover {
+    background: #d4b05a;
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: transparent;
+    color: var(--color-text);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid rgba(232, 228, 220, 0.25);
+    border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--color-text);
+  }
+
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 2rem;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--color-text-muted);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { width: 40px; opacity: 0.5; }
+    50% { width: 60px; opacity: 1; }
+  }
+
+  /* ===== STATS ===== */
+  #stats {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .stats-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .stat {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .stat.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .stat-value {
+    display: block;
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    color: var(--color-accent);
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+
+  .stat-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-top: 0.5rem;
+  }
+
+  /* ===== SECTION DIVIDER ===== */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  .divider-diamond {
+    width: 6px;
+    height: 6px;
+    background: var(--color-accent);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  /* ===== SERVICES ===== */
+  #services {
+    padding: 7rem 2rem;
+  }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    margin-bottom: 4rem;
+    max-width: 560px;
+  }
+
+  .section-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-tag::before {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--color-accent);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    letter-spacing: 0.03em;
+    line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+
+  .section-desc {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--color-border);
+    border: 1.5px solid var(--color-border);
+  }
+
+  .service-card {
+    background: var(--color-surface);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    position: relative;
+  }
+
+  .service-card:nth-child(2) { transition-delay: 0.1s; }
+  .service-card:nth-child(3) { transition-delay: 0.2s; }
+  .service-card:nth-child(4) { transition-delay: 0.3s; }
+  .service-card:nth-child(5) { transition-delay: 0.4s; }
+
+  .service-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .service-card.featured {
+    grid-column: span 2;
+  }
+
+  .service-img-wrap {
+    height: 220px;
+    overflow: hidden;
+  }
+
+  .service-card.featured .service-img-wrap {
+    height: 280px;
+  }
+
+  .service-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    filter: grayscale(20%) brightness(0.85);
+  }
+
+  .service-card:hover .service-img-wrap img {
+    transform: scale(1.04);
+  }
+
+  .service-body {
+    padding: 1.75rem;
+  }
+
+  .service-icon {
+    width: 2rem;
+    height: 2rem;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+
+  .service-body h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .service-body p {
+    font-size: 0.88rem;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+  }
+
+  /* ===== ABOUT ===== */
+  #about {
+    padding: 7rem 2rem;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .about-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-img-wrap {
+    position: relative;
+    opacity: 0;
+    transform: translateX(-24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .about-img-wrap.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .about-img-wrap img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    filter: grayscale(10%);
+  }
+
+  .about-img-badge {
+    position: absolute;
+    bottom: -1.5rem;
+    right: -1.5rem;
+    background: var(--color-accent);
+    color: #000;
+    padding: 1.5rem;
+    text-align: center;
+    min-width: 130px;
+  }
+
+  .badge-num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+
+  .badge-text {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+  }
+
+  .about-content {
+    opacity: 0;
+    transform: translateX(24px);
+    transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
+  }
+
+  .about-content.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .about-content p {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .about-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+
+  .about-points li {
+    font-size: 0.9rem;
+    color: var(--color-text);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .point-icon {
+    color: var(--color-accent);
+    font-size: 0.7rem;
+    flex-shrink: 0;
+    margin-top: 0.3rem;
+  }
+
+  /* ===== CONTACT ===== */
+  #contact {
+    padding: 7rem 2rem;
+  }
+
+  .contact-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .contact-header {
+    margin-bottom: 4rem;
+    max-width: 640px;
+  }
+
+  .contact-lead {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-top: 1rem;
+  }
+
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .contact-info {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 2rem;
+  }
+
+  .contact-info.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .contact-info-heading {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    letter-spacing: 0.06em;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .contact-item:hover {
+    border-color: var(--color-accent);
+  }
+
+  .contact-item-icon {
+    color: var(--color-accent);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .contact-item-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-item-value {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--color-text);
+  }
+
+  .contact-note {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .contact-note p {
+    font-size: 0.82rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  /* FORM CARD */
+  .form-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-strong);
+    border-top: 3px solid var(--color-accent);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s;
+  }
+
+  .form-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .form-card-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface-2);
+  }
+
+  .form-card-header h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    letter-spacing: 0.06em;
+    color: var(--color-text);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 2rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-group label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    padding: 0.85rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    appearance: none;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--color-text-muted);
+    opacity: 0.6;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--color-accent);
+    background: var(--color-surface-3);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-submit {
+    align-self: flex-start;
+    border: none;
+  }
+
+  .form-note {
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    min-height: 1.2em;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .stats-inner {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .service-card.featured {
+      grid-column: span 1;
+    }
+
+    .about-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .about-img-badge {
+      right: 0;
+    }
+
+    .contact-inner {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .stats-inner {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .hero-scroll-hint {
+      display: none;
+    }
+
+    .contact-form {
+      padding: 1.5rem;
+    }
+
+    .form-card-header {
+      padding: 1.25rem 1.5rem;
+    }
+  }
+</style>
