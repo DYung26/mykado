@@ -1,4 +1,5 @@
 ---
+import Logo from './Logo.astro';
 const navLinks = [
   { label: "Services", href: "#services" },
   { label: "About", href: "#about" },
@@ -8,10 +9,7 @@ const navLinks = [
 
 <header id="navbar">
   <nav>
-    <a href="/" class="logo">
-      <span class="logo-mark">M</span>
-      <span class="logo-text">YKADO</span>
-    </a>
+    <Logo />
 
     <ul class="nav-links">
       {navLinks.map((link) => (
@@ -94,19 +92,53 @@ const navLinks = [
   .logo {
     display: flex;
     align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .logo-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    background: var(--color-accent);
+    color: #000;
     font-family: var(--font-display);
-    font-size: 1.65rem;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .logo-name {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .logo-primary {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
     font-weight: 800;
     letter-spacing: 0.1em;
     color: var(--color-text);
   }
 
-  .logo-mark {
+  .logo-m {
     color: var(--color-accent);
   }
 
-  .logo-text {
-    color: var(--color-text);
+  .logo-sub {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-top: 0.15rem;
   }
 
   .nav-links {
