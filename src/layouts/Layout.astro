@@ -9,7 +9,9 @@ const {
   description = "Mykado delivers world-class engineering services including procurement, operational office setup, cooling systems, electrical infrastructure, and facility maintenance.",
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? "https://mykado.com");
+const siteURL = Astro.site ?? new URL("https://mykado.org");
+const canonicalURL = new URL(Astro.url.pathname, siteURL);
+const ogImage = new URL("/og-image.png", siteURL);
 ---
 
 <!doctype html>
@@ -30,11 +32,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? "https://mykado.c
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
@@ -43,11 +49,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? "https://mykado.c
         "@type": "Organization",
         "name": "Mykado Engineering",
         "description": "Engineering services including procurement, operational setup, cooling, electrical, and maintenance.",
-        "url": "https://mykado.com",
+        "url": "https://mykado.org",
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "customer service",
-          "email": "info@mykado.com"
+          "email": "info@mykado.org"
         }
       }
     </script>
