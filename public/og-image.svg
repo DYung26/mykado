@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#0d0f0e"/>
+  <circle cx="160" cy="315" r="110" fill="#2db52d"/>
+  <text
+    x="160"
+    y="330"
+    text-anchor="middle"
+    font-family="'Tinos', 'Times New Roman', serif"
+    font-weight="700"
+    font-size="96"
+    fill="#ffffff"
+  ><tspan>M</tspan><tspan font-style="italic">E</tspan><tspan>S</tspan></text>
+  <text
+    x="320"
+    y="285"
+    font-family="'Barlow Condensed', 'Arial Narrow', Arial, sans-serif"
+    font-weight="700"
+    font-size="64"
+    fill="#eae6de"
+    letter-spacing="1"
+  >Mykado Engineering</text>
+  <text
+    x="320"
+    y="355"
+    font-family="'Barlow Condensed', 'Arial Narrow', Arial, sans-serif"
+    font-weight="500"
+    font-size="36"
+    fill="#2db52d"
+    letter-spacing="2"
+  >PROCUREMENT · OPERATIONS · ENGINEERING</text>
+  <text
+    x="320"
+    y="410"
+    font-family="'Arial', sans-serif"
+    font-size="26"
+    fill="#8c8a85"
+  >mykado.org</text>
+</svg>
