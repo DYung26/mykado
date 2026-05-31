@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mykado.org/sitemap-index.xml
