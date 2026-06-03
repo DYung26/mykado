@@ -5,8 +5,8 @@ export interface Props {
 }
 
 const {
-  title = "Mykado Engineering — Procurement, Operations & Engineering Services",
-  description = "Mykado delivers world-class engineering services including procurement, operational office setup, cooling systems, electrical infrastructure, and facility maintenance.",
+  title = "Engineering, Procurement & Facility Maintenance Services in Lagos | Mykado Engineering",
+  description = "Mykado Engineering provides procurement services, electrical engineering, HVAC installation, facility maintenance and operational office setup services in Lagos, Nigeria.",
 } = Astro.props;
 
 const siteURL = Astro.site ?? new URL("https://mykado.org");
@@ -46,14 +46,25 @@ const ogImage = new URL("/og-image.png", siteURL);
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
+        "@type": "LocalBusiness",
         "name": "Mykado Engineering",
-        "description": "Engineering services including procurement, operational setup, cooling, electrical, and maintenance.",
+        "description": "Engineering, procurement, electrical engineering, cooling systems, operational office setup and facility maintenance services in Lagos, Nigeria.",
         "url": "https://mykado.org",
+        "image": "https://mykado.org/og-image.png",
+        "telephone": "+2347030480708",
+        "email": "mykadoeng@gmail.com",
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "customer service",
-          "email": "info@mykado.org"
+          "telephone": "+2347030480708",
+          "email": "mykadoeng@gmail.com"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "34 Celestial Avenue, Oke-Ira",
+          "addressLocality": "Ojodu",
+          "addressRegion": "Lagos",
+          "addressCountry": "NG"
         }
       }
     </script>

@@ -61,12 +61,18 @@ const stats = [
 
     <div class="hero-content">
       <div class="hero-tag">Engineering Excellence</div>
-      <h1 class="hero-title">
+
+      <h1 class="hero-keyword-heading">
+        Engineering, Procurement & Facility Services in Lagos
+      </h1>
+
+      <h2 class="hero-title">
         Built to<br />
         <span class="accent">Perform.</span><br />
         Engineered to<br />
         Last.
-      </h1>
+      </h2>
+
       <p class="hero-sub">
         Mykado delivers end-to-end engineering services — from strategic procurement and
         office setup to cooling systems, electrical infrastructure, and maintenance.
@@ -414,6 +420,17 @@ const stats = [
     width: 32px;
     height: 1px;
     background: var(--color-accent);
+  }
+
+  .hero-keyword-heading {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 1.8vw, 1.35rem);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(232, 228, 220, 0.9);
+    margin-bottom: 1rem;
+    max-width: 720px;
   }
 
   .hero-title {
