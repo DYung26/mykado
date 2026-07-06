@@ -30,6 +30,7 @@ const ogImage = new URL("/og-image.png", siteURL);
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="Mykado Engineering Services" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
@@ -43,6 +44,14 @@ const ogImage = new URL("/og-image.png", siteURL);
     <meta name="twitter:image" content={ogImage} />
 
     <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Mykado Engineering Services",
+        "url": "https://mykado.org"
+      }
+    </script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
