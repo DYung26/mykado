@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import Lightbox from '../components/Lightbox.astro';
 import { services } from '../data/services';
 import { workPhotos } from '../data/our-work';
 
@@ -136,9 +137,17 @@ const stats = [
 
       <div class="work-teaser-grid">
         {teaserPhotos.map((photo) => (
-          <div class="work-teaser-item">
+          <button
+            type="button"
+            class="work-teaser-item"
+            data-lightbox-trigger="our-work"
+            data-full-src={photo.image.src}
+            data-alt={photo.alt}
+            data-caption={photo.caption}
+            aria-label={`View full image: ${photo.caption}`}
+          >
             <Image src={photo.image} alt={photo.alt} width={500} height={500} loading="lazy" />
-          </div>
+          </button>
         ))}
       </div>
 
@@ -329,6 +338,8 @@ const stats = [
       </div>
     </div>
   </section>
+
+  <Lightbox groupId="our-work" />
 
   <Footer />
 </Layout>
@@ -781,6 +792,10 @@ const stats = [
     opacity: 0;
     transform: translateY(24px);
     transition: opacity 0.6s ease, transform 0.6s ease;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: block;
   }
 
   .work-teaser-item:nth-child(2) { transition-delay: 0.1s; }
