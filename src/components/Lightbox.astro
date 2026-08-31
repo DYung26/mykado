@@ -1,0 +1,195 @@
+---
+export interface Props {
+  groupId: string;
+}
+
+const { groupId } = Astro.props;
+---
+
+<div class="lightbox" id={`lightbox-${groupId}`} data-lightbox-group={groupId} aria-hidden="true">
+  <button class="lightbox-close" aria-label="Close">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="22" height="22">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+  <button class="lightbox-nav lightbox-prev" aria-label="Previous image">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="26" height="26">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+    </svg>
+  </button>
+  <button class="lightbox-nav lightbox-next" aria-label="Next image">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="26" height="26">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+    </svg>
+  </button>
+  <figure class="lightbox-figure">
+    <img class="lightbox-img" src="" alt="" />
+    <figcaption class="lightbox-caption"></figcaption>
+  </figure>
+</div>
+
+<script>
+  class LightboxController {
+    private root: HTMLElement;
+    private img: HTMLImageElement;
+    private caption: HTMLElement;
+    private triggers: HTMLElement[] = [];
+    private activeIndex = 0;
+
+    constructor(root: HTMLElement) {
+      this.root = root;
+      this.img = root.querySelector('.lightbox-img') as HTMLImageElement;
+      this.caption = root.querySelector('.lightbox-caption') as HTMLElement;
+
+      root.querySelector('.lightbox-close')?.addEventListener('click', () => this.close());
+      root.querySelector('.lightbox-prev')?.addEventListener('click', () => this.step(-1));
+      root.querySelector('.lightbox-next')?.addEventListener('click', () => this.step(1));
+      root.addEventListener('click', (e) => {
+        if (e.target === root) this.close();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!this.root.classList.contains('open')) return;
+        if (e.key === 'Escape') this.close();
+        if (e.key === 'ArrowLeft') this.step(-1);
+        if (e.key === 'ArrowRight') this.step(1);
+      });
+    }
+
+    registerTriggers(triggers: HTMLElement[]) {
+      this.triggers = triggers;
+      triggers.forEach((trigger, index) => {
+        trigger.addEventListener('click', () => this.open(index));
+      });
+    }
+
+    private open(index: number) {
+      this.activeIndex = index;
+      this.render();
+      this.root.classList.add('open');
+      this.root.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    private close() {
+      this.root.classList.remove('open');
+      this.root.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    private step(direction: number) {
+      this.activeIndex = (this.activeIndex + direction + this.triggers.length) % this.triggers.length;
+      this.render();
+    }
+
+    private render() {
+      const trigger = this.triggers[this.activeIndex];
+      const src = trigger.dataset.fullSrc ?? '';
+      const alt = trigger.dataset.alt ?? '';
+      const captionText = trigger.dataset.caption ?? '';
+      this.img.src = src;
+      this.img.alt = alt;
+      this.caption.textContent = captionText;
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('.lightbox').forEach((root) => {
+    const groupId = root.dataset.lightboxGroup;
+    const controller = new LightboxController(root);
+    const triggers = Array.from(
+      document.querySelectorAll<HTMLElement>(`[data-lightbox-trigger="${groupId}"]`)
+    );
+    controller.registerTriggers(triggers);
+  });
+</script>
+
+<style>
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(13, 15, 14, 0.96);
+    padding: 3rem 2rem;
+  }
+
+  .lightbox.open {
+    display: flex;
+  }
+
+  .lightbox-figure {
+    max-width: 1100px;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .lightbox-img {
+    max-width: 100%;
+    max-height: 78vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border: 1px solid var(--color-border-strong);
+  }
+
+  .lightbox-caption {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.2s;
+  }
+
+  .lightbox-close:hover {
+    color: var(--color-accent);
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+    padding: 0.75rem;
+    transition: color 0.2s;
+  }
+
+  .lightbox-nav:hover {
+    color: var(--color-accent);
+  }
+
+  .lightbox-prev {
+    left: 1rem;
+  }
+
+  .lightbox-next {
+    right: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .lightbox {
+      padding: 4rem 1rem 2rem;
+    }
+
+    .lightbox-nav {
+      padding: 0.5rem;
+    }
+  }
+</style>
